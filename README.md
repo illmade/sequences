@@ -32,7 +32,7 @@ You quickly run up against all the usual machine learning techniques - a pretty 
 
 A mean squared error seems reasonable for this data.
 
-#LSTMs GRUs Normalization:
+# LSTMs GRUs Normalization:
 ![alt tag](/resources/squiggels.png)
 
 Some initial guessing: the real values are in Yellow, Red looking furthest into the future.
@@ -44,7 +44,7 @@ It’s nice and easy in tensorflow to swap different rnn cells in and out - I fo
 
 Let’s assume the gases are related in some way: given data from a few of the gases present can we predict the future levels of a different gas?
 
-To do this we create dynamic rnns for each input gas, combine them with a sum and learnable multipliers for each gases effect and adjust our mean squared error using label data from the target gas. 
+To do this we create dynamic rnns for each input gas, combine them with a sum and learnable multipliers for each gas's effect and adjust our mean squared error using label data from the target gas. 
 The multiple inputs to our final logits increase the complexity slightly but tensorflow effectively removes the effort of thinking about the gradient flows (a good and a bad thing).
 
 It works well but if we look at the normalised input data this isn’t too surprising, there are a lot of similarities in the data, but it’s nice that it works.
