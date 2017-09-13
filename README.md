@@ -28,9 +28,13 @@ If we chose 20 and 7 it would look like:
 
 and we are predicting all the values 21-27, at the next time step our inputs are 2-21 and we predict 22-28
 
+A mean squared error seems reasonable for this data.
+
 You quickly run up against all the usual machine learning techniques - a pretty small lstm network quickly learns the training data well so we’ll need regularization and dropout. We also need to batch our data: without it we can get pretty good initial learning but there is a high risk of instability later on. 
 
-A mean squared error seems reasonable for this data.
+![alt tag](/resources/losses.png)
+
+Results of increasing batch size from 4 to 8 to 12. Significant reduction in noise while learning and better convergence.
 
 # LSTMs GRUs Normalization:
 ![alt tag](/resources/squiggels.png)
@@ -55,5 +59,13 @@ These are out of training predictions: the blue trace is the real values, red ou
 
 I swapped in and out a few different gas mixes - the logit multipliers nicely follow visual intuition of how useful one gas will be in predicting the actions of another.
 
-I ran the notebook in a standard tensorflow docker image: [https://hub.docker.com/r/tensorflow/tensorflow/](https://hub.docker.com/r/tensorflow/tensorflow/)
+I ran the [notebook](/notebooks/sequence_notebook.ipynb) in a standard tensorflow docker image: [https://hub.docker.com/r/tensorflow/tensorflow/](https://hub.docker.com/r/tensorflow/tensorflow/)
+
+# What are we learning for?
+
+How much regularization we apply can depend on what we want the data to do. If we hope the time series continues much as before the purpose may be to spot anomalies and less regularization will help highlight change.
+
+The low regularization example below tracks much of the target set very closely but areas of large difference increase loss significantly - which may be what we want.
+
+![alt tag](/resources/short_term.png)
 
